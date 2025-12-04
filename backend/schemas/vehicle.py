@@ -8,4 +8,20 @@ class VehicleBase(BaseModel):
     license_plate : str
     mileage : int
     last_service : date
-    
+
+class VehicleCreate(VehicleBase):
+    pass
+
+class VehicleOut(VehicleBase):
+    id : int
+    class Config():
+        orm_mode = True
+
+class VehicleUpdate(BaseModel):
+    customer_id : int | None
+    make : str | None
+    mode : str | None
+    year : int | None
+    license_plate : str | None
+    mileage : str | None
+    last_service : date | None
