@@ -1,0 +1,18 @@
+FASTApi backend:
+
+(done)
+POST /customers - Create new customer 
+GET /customers - Get all customers (with pagination)
+GET /customers/{id} - Get customer by ID
+PUT /customers/{id} - Update customer
+DELETE /customers/{id} - Delete customer
+GET /customers/search - Search customers by name/email/phone (query params)
+
+
+VehicleServiceManagement
+-> backend
+    ->Router
+    ->Model
+    ->Database
+    ->Schemas
+

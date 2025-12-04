@@ -1,0 +1,21 @@
+So bad.... :( .
+I did router for customer, schemas for customer.
+
+
+Things learned:
+    1. What is the real use of schemas, router?
+
+        SCHEMA:
+        The schemas are used to define the response type of the https response. used to create the data model to get the input from the user and show the output to the user very easily.
+        Use inheritance to create the schema.
+        Depending upon the requirement design the schema (Ex: For creating a new-entry in db, we usually create the schema with input from the user from frontend.
+
+        ROUTER:
+        The routers are used to define the API Endpoints.
+        The router is created by using APIRouter class in fastapi.
+
+    2. What is the use of orm_mode while sending the data from server to client?
+        While sending the data from the server to the client we can't send it as such so we need to convert that into json format.
+
+
+
