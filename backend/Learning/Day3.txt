@@ -1,0 +1,3 @@
+If you have multiple table which are connected with the foreign key word they has to on the same base and on the same database theyonly they will be able to connect or join.
+
+

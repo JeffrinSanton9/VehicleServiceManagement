@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import date
 from typing import Annotated
+
 class VehicleBase(BaseModel):
     customer_id : int
     make : str
@@ -8,7 +9,7 @@ class VehicleBase(BaseModel):
     year : int
     license_plate : str
     mileage : int | None = None
-    last_service : date | None = None
+    last_service_date : date | None = None
 
 
 class VehicleOut(VehicleBase):

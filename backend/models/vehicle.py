@@ -17,3 +17,4 @@ class Vehicle(Base):
     last_service_date = Column(Date)
 
     customer = relationship("Customer", back_populates="vehicles")
+    service_bookings = relationship("ServiceBooking", back_populates="vehicle", cascade="all, delete")
