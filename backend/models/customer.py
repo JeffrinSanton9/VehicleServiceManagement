@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, func
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
+from sqlalchemy.orm import declarative_base, relationship
+from database.database import Base
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -11,3 +10,5 @@ class Customer(Base):
     email = Column(String, unique=True, nullable=False)
     phone = Column(String, nullable=False)
     address = Column(String, nullable=True)
+    vehicles = relationship("Vehicle", back_populates="customer", cascade="all, delete")
+

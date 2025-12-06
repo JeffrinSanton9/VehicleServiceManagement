@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends 
 from sqlalchemy.orm import Session
 from schemas.customer import CustomerCreate, CustomerUpdate, CustomerBase, CustomerOut
-from customer_database.database import get_db
+from database.database import get_db
 from models.customer import Customer
 
 #customer router init

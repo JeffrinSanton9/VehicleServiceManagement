@@ -1,12 +1,13 @@
-#the main aim of vehicle_database is to create the connection with the customer.db
-from sqlalchemy import create_session
+from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "sqlite3:////home/jeff/Documents/Project/VehicleServiceManagement/backend/database/vehicle.db"
+Base = declarative_base()
 
-engine = create_session(DATABASE_URL)
+DATABASE_URL = "sqlite:////home/jeff/Documents/Project/VehicleServiceManagement/backend/database/customer.db"
 
-SessionLocal = sessionmaker(engine=engine, autocommit=False, autoflush=False)
+eng = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+SessionLocal = sessionmaker(bind=eng, autocommit=False, autoflush=False)
 
 def get_db():
     db = SessionLocal()
