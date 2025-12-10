@@ -26,7 +26,7 @@ async def search_customer(
     elif email != None:
         customer = db.query(Customer).filter(Customer.email == email).first()
     elif phoneNumber != None:
-        customer = db.query(Customer).filter(Customer.phoneNumber == phoneNumber).first()
+        customer = db.query(Customer).filter(Customer.phone == phoneNumber).first()
     return customer
 
 @router.get("/id/{id}", response_model=CustomerOut)
