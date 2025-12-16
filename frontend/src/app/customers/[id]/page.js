@@ -59,7 +59,6 @@ export default function Page(){
 				))}
 			</ul>
 			<br />
-			<button onClick={handleAddVehicle}>Add Vehicle</button>
 
 		</div>
 	)
