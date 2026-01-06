@@ -1,9 +1,10 @@
 #importing dependencies
-from fastapi import APIRouter, Depends 
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from schemas.customer import CustomerCreate, CustomerUpdate, CustomerBase, CustomerOut
 from database.database import get_db
 from models.customer import Customer
+from fastapi import HTTPException
 
 #customer router init
 router = APIRouter(prefix="/customers", tags=["customers"])
@@ -11,6 +12,8 @@ router = APIRouter(prefix="/customers", tags=["customers"])
 async def get_customers(db : Session = Depends(get_db)):
     #returns all the customer's details
     customers = db.query(Customer).all()
+    if not customers:
+        raise HTTPException(status_code=404, detail="Customer not found")
     return customers
 
 @router.get("/search", response_model=CustomerOut)
@@ -27,20 +30,30 @@ async def search_customer(
         customer = db.query(Customer).filter(Customer.email == email).first()
     elif phoneNumber != None:
         customer = db.query(Customer).filter(Customer.phone == phoneNumber).first()
+    if not customer:
+        raise HTTPException(status_code=404, detail="Customer not found")
     return customer
 
 @router.get("/id/{id}", response_model=CustomerOut)
 async def get_customer_by_id(id : int, db : Session = Depends(get_db)):
     #returns customer by id
     customer = db.query(Customer).filter(Customer.id == id).first()
+    if not customer:
+        raise HTTPException(status_code=404, detail="Customer not found")
     return customer
 
 @router.delete("/{id}")
 async def delete_customer(id : int, db : Session = Depends(get_db)):
     #delete the customer by id.
     customer = db.query(Customer).filter(Customer.id == id).first()
+    if not customer:
+        raise HTTPException(status_code=404, detail="Customer not found")
     db.delete(customer)
-    db.commit()
+    try:
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Failed to delete customer")
     
 @router.post("/")
 async def create_customer(data : CustomerCreate, db : Session = Depends(get_db)):
